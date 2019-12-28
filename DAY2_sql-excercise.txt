@@ -1,0 +1,310 @@
+EXCERCISE QUERIES
+
+#1
+SELECT ename FROM employee WHERE empno IN (SELECT DISTINCT empno FROM employee WHERE sal>ANY(SELECT sal FROM employee WHERE empno IN(SELECT mgr FROM employee)) AND empno NOT IN(SELECT M.empno FROM employee E JOIN employee M ON E.empno=M.mgr WHERE E.sal<M.sal) AND mgr IS NOT NULL);
+
+#2
+select deptno, ename, sal*12 as annualSalary from employee order by deptno;
+
+#3
+select * from (select * from employee order by sal) where ROWNUM<6;
+
+#4
+select count(e.empno) from employee e inner join employee a on e.mgr=a.empno where e.sal>a.sal;
+
+#5
+ select ename from employee where empno in(select mgr from employee) AND mgr!=(select empno from employee where job='president');
+#6
+select * from employee where deptno not in(select deptno from dept);
+
+#7
+select ename from employee where (TO_DATE('31-DEC-89')-hiredate)/365>20;
+
+#8
+select * from employee where mod(sal,200)=0;
+
+#9
+select * from employee where sal<1000;
+
+#10
+select * from employee where TO_CHAR(hiredate,'MON')='DEC';
+
+#11
+SELECT CONCAT(UPPER(SUBSTR(ename,1,LENGTH(ename)/2)),LOWER(SUBSTR(ename,(LENGTH(ename)/2)+1,LENGTH(ename)))) FROM employee;
+
+#12
+select * from employee where TO_CHAR(hiredate,'DD') <'15';
+
+#13
+ select * from employee where empno in(select mgr from employee);
+
+#14
+SELECT * FROM (SELECT D.dname, COUNT(E.deptno) FROM employee E JOIN dept D ON E.deptno=D.deptno GROUP BY D.dname ORDER BY COUNT(E.deptno) DESC) WHERE ROWNUM=1;
+
+#15
+SELECT E1.empno, E1.ename, E1.hiredate FROM employee E1, employee E2 WHERE E1.hiredate=E2.hiredate AND E1.ename<>E2.ename;
+
+#16
+SELECT * FROM (SELECT ename, COUNT(empno) FROM employee where empno in(select mgr from employee) GROUP BY ename ORDER BY COUNT(empno) DESC) WHERE ROWNUM=1;
+
+
+
+
+
+
+MISC QUERIES
+
+ alter table emp drop constraint emp_dept_fk;
+
+Table altered.
+
+SQL> desc emp;
+ Name                                                                                                      Null?    Type
+ ----------------------------------------------------------------------------------------------------------------- -------- ----------------------------------------------------------------------------
+ EMPID                                                                                                     NOT NULL NUMBER(2)
+ DEPTNO                                                                                                             NUMBER(2)
+ SALARY                                                                                                             NUMBER(5)
+
+SQL> drop table dept;
+
+Table dropped.
+
+SQL> create table dept(deptno number(2) primary key, dname varchar2(30), location varchar2(30) );
+
+Table created.
+
+SQL> desc dept;
+ Name                                                                                                      Null?    Type
+ ----------------------------------------------------------------------------------------------------------------- -------- ----------------------------------------------------------------------------
+ DEPTNO                                                                                                    NOT NULL NUMBER(2)
+ DNAME                                                                                                              VARCHAR2(30)
+ LOCATION                                                                                                           VARCHAR2(30)
+
+SQL> insert into dept values(&deptno, &dname, &location);
+Enter value for deptno: 10
+Enter value for dname: 'IT'
+Enter value for location: 'bangalore'
+old   1: insert into dept values(&deptno, &dname, &location)
+new   1: insert into dept values(10, 'IT', 'bangalore')
+
+1 row created.
+
+SQL> /
+Enter value for deptno: 20
+Enter value for dname: 'SALES'
+Enter value for location: 'mumbai'
+old   1: insert into dept values(&deptno, &dname, &location)
+new   1: insert into dept values(20, 'SALES', 'mumbai')
+
+1 row created.
+
+SQL> /
+Enter value for deptno: 30
+Enter value for dname: 'ACCOUNTING'
+Enter value for location: 'kolkata'
+old   1: insert into dept values(&deptno, &dname, &location)
+new   1: insert into dept values(30, 'ACCOUNTING', 'kolkata')
+
+1 row created.
+
+SQL> /
+Enter value for deptno: 40
+Enter value for dname: 'MANAGEMENT'
+Enter value for location: 'delhi'
+old   1: insert into dept values(&deptno, &dname, &location)
+new   1: insert into dept values(40, 'MANAGEMENT', 'delhi')
+
+1 row created.
+
+SQL> select * from dept;
+
+    DEPTNO DNAME                          LOCATION
+---------- ------------------------------ ------------------------------
+        10 IT                             bangalore
+        20 SALES                          mumbai
+        30 ACCOUNTING                     kolkata
+        40 MANAGEMENT                     delhi
+
+
+//Used alternative to joins
+
+select e.ename,e.deptno, dname, location from employee e, dept d where e.deptno=d.deptno;
+
+ENAME                                                  DEPTNO DNAME                          LOCATION
+-------------------------------------------------- ---------- ------------------------------ ------------------------------
+smith                                                      20 SALES                          mumbai
+allen                                                      30 ACCOUNTING                     kolkata
+ward                                                       30 ACCOUNTING                     kolkata
+jones                                                      20 SALES                          mumbai
+martin                                                     30 ACCOUNTING                     kolkata
+blake                                                      30 ACCOUNTING                     kolkata
+clark                                                      10 IT                             bangalore
+scott                                                      20 SALES                          mumbai
+king                                                       10 IT                             bangalore
+turner                                                     30 ACCOUNTING                     kolkata
+adams                                                      20 SALES                          mumbai
+james                                                      30 ACCOUNTING                     kolkata
+ford                                                       20 SALES                          mumbai
+miller                                                     10 IT                             bangalore
+
+14 rows selected.
+
+
+
+//Dept with no employees
+
+select  d.deptno,dname, location from employee e right join dept d on e.deptno=d.deptno where e.empno is NULL;
+
+    DEPTNO DNAME                          LOCATION
+---------- ------------------------------ ------------------------------
+        40 MANAGEMENT                     delhi
+
+
+
+//using sub-query
+
+ select distinct deptno,dname from dept where deptno not in (select deptno from employee);
+
+    DEPTNO DNAME
+---------- ------------------------------
+        40 MANAGEMENT
+
+
+
+//Group by and Having clause
+
+
+select job, count(job) from employee group by job;
+
+JOB                                                COUNT(JOB)
+-------------------------------------------------- ----------
+salesman                                                    4
+clerk                                                       4
+president                                                   1
+manager                                                     3
+analyst                                                     2
+
+
+
+SQL> select job, count(job) as Employee from employee group by job having count(job)>3;
+
+JOB                                                  EMPLOYEE
+-------------------------------------------------- ----------
+salesman                                                    4
+clerk                                                       4
+
+
+create table product(pid number(4),pname varchar2(5), price number(5,2));
+
+alter table product modify pname varchar2(20);
+
+insert into product values(&pid,&pname,&price);
+
+insert into product values(&pid,&pname,&price);
+Enter value for pid: 101
+Enter value for pname: 'LED TV'
+Enter value for price: 500.45
+old   1: insert into product values(&pid,&pname,&price)
+new   1: insert into product values(101,'LED TV',500.45)
+
+1 row created.
+
+SQL> /
+Enter value for pid: 102
+Enter value for pname: 'Mobile'
+Enter value for price: 300.5
+old   1: insert into product values(&pid,&pname,&price)
+new   1: insert into product values(102,'Mobile',300.5)
+
+1 row created.
+
+SQL> /
+Enter value for pid: 103
+Enter value for pname: 'Laptop'
+Enter value for price: 800.5
+old   1: insert into product values(&pid,&pname,&price)
+new   1: insert into product values(103,'Laptop',800.5)
+
+1 row created.
+
+create table sales(pid number(2), item_sold number(10));
+
+alter table product modify pname varchar2(20);
+
+insert into sales values(&pid,&item_sold);
+Enter value for pid: 101
+Enter value for item_sold: 5
+old   1: insert into sales values(&pid,&item_sold)
+new   1: insert into sales values(101,5)
+
+1 row created.
+
+SQL> /
+Enter value for pid: 102
+Enter value for item_sold: 10
+old   1: insert into sales values(&pid,&item_sold)
+new   1: insert into sales values(102,10)
+
+1 row created.
+
+SQL> /
+Enter value for pid: 101
+Enter value for item_sold: 15
+old   1: insert into sales values(&pid,&item_sold)
+new   1: insert into sales values(101,15)
+
+1 row created.
+
+select pname,(select sum(item_sold)from sales where pid=p.pid) as "total item sold" from product p;
+
+PNAME                total item sold
+-------------------- ---------------
+LED TV                            20
+Mobile                            10
+Laptop
+
+
+ create table salesman as (select * from employee where job = 'salesman');
+
+Table created.
+
+SQL> select * from salesman;
+
+     EMPNO ENAME                                              JOB                                        HIREDATE  MGR
+                                             SAL       COMM
+---------- -------------------------------------------------- -------------------------------------------------- --------- -------------------------------------------------- ---------- ----------
+    DEPTNO
+----------
+      7499 allen                                              salesman                                   20-FEB-81 7698
+                                            1600        300
+        30
+
+      7521 ward                                               salesman                                   22-FEB-81 7698
+                                            1250        500
+        30
+
+      7654 martin                                             salesman                                   28-SEP-81 7698
+                                            1250       1400
+        30
+
+      7844 turner                                             salesman                                   08-SEP-81 7698
+                                            1500          0
+        30
+
+
+SQL> desc salesman;
+ Name                                                                                                      Null?    Type
+ ----------------------------------------------------------------------------------------------------------------- -------- ----------------------------------------------------------------------------
+ EMPNO                                                                                                              NUMBER(5)
+ ENAME                                                                                                              VARCHAR2(50)
+ JOB                                                                                                                VARCHAR2(50)
+ HIREDATE                                                                                                           DATE
+ MGR                                                                                                                VARCHAR2(50)
+ SAL                                                                                                                NUMBER(5)
+ COMM                                                                                                               NUMBER(5)
+ DEPTNO                                                                                                             NUMBER(5)
+
+
+
+insert into salesman(select * from employee where job ='clerk');
+

@@ -1,0 +1,182 @@
+<html>
+    <head>
+    <style>
+        
+        .header{
+            background-color: darkseagreen;
+        }
+        
+        #color_green{
+            color:green;
+        }
+        button{
+            display: inline-block;
+            border:none;
+            margin: 10px;
+            padding-left:10px;
+            padding-right:10px;
+            padding-bottom:30px;
+            padding-top:30px;
+            text-decoration: none;
+            border-radius:50%; 
+            color:white;
+            background-color:forestgreen;
+            
+        }
+        
+        button:hover {
+            
+  -webkit-transition-duration: 0.4s; 
+  transition-duration: 0.4s;
+            border: solid;
+  border-color:forestgreen;
+            background-color: white;
+  color:forestgreen;
+}
+        .footer_center{
+            text-align: center;
+        }
+         .contact{
+            float:left;
+             width: inherit;
+             background-color: darkseagreen;
+        }
+        .footer{
+            background-color: darkseagreen;
+            width: 100%;
+            margin: -10px;
+        }
+        table,th,tr,td{
+            border:solid green 2px;
+            text-align: center;
+        }
+        tr:hover {background-color: #f5f5f5;} 
+        
+        
+        
+        .one{
+            text-decoration: none;
+        }
+        
+       
+        
+        </style>
+    </head>
+<body>
+    
+    <div class="header">
+    <h1 style="text-align:center">Deloitte<span id="color_green">.</span></h1>
+    </div>
+        <hr style="color: dimgray">
+    <button  type="button"  onclick="window.location.href='http://www.deloitte.com';">Visit Page</button>
+    
+    <br>
+    <a href="#footer"> Go to footer</a>
+    <hr>
+    <h2>d<sub>1</sub><sup>2</sup>&nbsp;&nbsp;+&nbsp;&nbsp;d<sub>2</sub><sup>2</sup>&nbsp;&nbsp;=&nbsp;&nbsp;d3</h2>
+    <hr>
+    <table>
+        <tr>
+    <th rowspan="2">Employee Id</th>
+    <th colspan="2">Employee Name</th>
+    <th rowspan="2">Employee Salary</th>
+            </tr>
+        <tr>
+        <th>First name</th>
+            <th>Last name</th>
+        </tr>
+    <tr><td>1</td>
+    <td>abc</td>
+        <td>Sharma</td>
+    <td>10000</td>
+    </tr>
+    
+        <tr>
+        <td>2</td>
+            <td>xyz</td>
+    <td>Verma</td>
+    <td>20000</td>
+    </tr>
+    
+    </table>
+    <hr>
+    <h4>List of programming languages</h4>
+    <ol>
+    <li>
+        Java</li>
+    <li>Python</li>
+    <li>C</li>
+    <li>C#</li>
+    </ol>
+    <hr>
+    <h4>List of programming languages</h4>
+    <ol type="a" start="c">
+    <li>
+        Java</li>
+    <li>Python</li>
+    <li>C</li>
+    <li>C#</li>
+    </ol>
+    <hr>
+    <h4>List of programming languages</h4>
+    <ul>
+    <li>
+        Java</li>
+    <li>Python</li>
+    <li>C</li>
+    <li>C#</li>
+    </ul>
+    <hr>
+    <h4>List of programming languages</h4>
+    <dl>
+    <dt>
+        Java</dt>
+        <dd> Platform-independent language.</dd>
+    
+    <dt>C/C++</dt>
+        <dd> Not Platform-independent languages.</dd>
+    </dl>
+    <hr>
+    <a class="one" href="http://www.deloitte.com" target="_blank">click here</a>
+    
+    <form action="table.html">
+    
+        User name:<input type="text" id="tUsername" required value="1234" placeholder="Enter Username">
+        <br>
+        Enter Email:<input type="text" id="temail" placeholder="Enter Email"checked><br>
+        Enter Name:&nbsp;<input type="text" id="tname" placeholder="Enter name"><br>
+        Enter Address:&nbsp;<input type="text" id="taddress" placeholder="Enter address"><br>
+        Enter Gender:&nbsp;<input type="radio" name="gender" value="male">Male <br>
+        <input type="radio" name="gender" value="Female">Female<br>
+        <br>
+        language(s) known:
+        <input type="checkbox" name="lang" value="Java"> Java<br>
+        <input type="checkbox" name="lang" value="Python"> Python<br>
+        <input type="checkbox" name="lang" value="C"> C <br>
+        <br>
+        Country:
+        <select>
+        <option>India</option>
+        <option>USA</option>
+        <option>China</option>
+            </select>
+        <input type="submit">
+        <input type="reset">
+    </form>
+    
+    <h3>fasdfasd</h3>
+    <h4>adsfasd</h4>
+    <h5>dfdsafs</h5>
+    <h6>sdfsdfsd</h6>
+    
+    <div class="footer" id="footer">
+    <div class="footer_center" >&COPY;Deloitte USI,2020. All rights reserved.</div>
+   <div class="contact">
+        Contact Us:<br>
+         <a href="www.instagram.com">instagram</a><br>
+       <a href="www.facebook.com">facebook</a><br>
+       <a href="www.twitter.com">twitter</a><br>
+        </div>
+    </div>
+    </body>
+</html>

@@ -1,0 +1,843 @@
+SQL> create table employee(empno number(5) primary key, ename varchar2(50), job varchar2(50), hiredate date, mgr varchar2(50), sal number(5), comm number(5), deptno number(5));
+
+Table created.
+
+SQL>
+SQL> insert into employee values(7369,'smith','clerk','17-DEC-80', '7902', 800, NULL, 20);
+
+1 row created.
+
+SQL> insert into employee values(7499,'allen','salesman','20-FEB-81', '7698', 1600, 300, 30);
+
+1 row created.
+
+SQL> insert into employee values(7499,'ward','salesman','22-FEB-81', '7698', 1250, 500, 30);
+insert into employee values(7499,'ward','salesman','22-FEB-81', '7698', 1250, 500, 30)
+*
+ERROR at line 1:
+ORA-00001: unique constraint (SYSTEM.SYS_C007000) violated
+
+
+SQL> insert into employee values(7521,'ward','salesman','22-FEB-81', '7698', 1250, 500, 30);
+
+1 row created.
+
+SQL> insert into employee values(7566,'jones','manager','02-APR-81', '7839', 2975, NULL, 20);
+
+1 row created.
+
+SQL> insert into employee values(7654,'martin','salesman','28-SEP-81', '7698', 1250, 1400, 30);
+
+1 row created.
+
+SQL> insert into employee values(7698,'blake','manager','01-MAY-81', '7839', 2850, NULL, 30);
+
+1 row created.
+
+SQL> insert into employee values(7782,'clark','manager','09-JUN-81', '7839', 2450, NULL, 10);
+
+1 row created.
+
+SQL> insert into employee values(7782,'scott','analyst','19-APR-87', '7566', 3000, NULL, 20);
+insert into employee values(7782,'scott','analyst','19-APR-87', '7566', 3000, NULL, 20)
+*
+ERROR at line 1:
+ORA-00001: unique constraint (SYSTEM.SYS_C007000) violated
+
+
+SQL> insert into employee values(7788,'scott','analyst','19-APR-87', '7566', 3000, NULL, 20);
+
+1 row created.
+
+SQL> insert into employee values(7839,'king','president','17-NOV-81', NULL, 5000, NULL, 10);
+
+1 row created.
+
+SQL> insert into employee values(7844,'turner','salesman','08-SEP-81', 7698, 1500, 0, 30);
+
+1 row created.
+
+SQL> create table employee(&empno, &ename, &job, &hiredate, &mgr, &sal, &comm, &deptno);
+Enter value for empno: 7876
+Enter value for ename: 'adams'
+Enter value for job: 'clerk'
+Enter value for hiredate: '23-MAY-87'
+Enter value for mgr: 7788
+Enter value for sal: 1100
+Enter value for comm: NULL
+Enter value for deptno: 20
+old   1: create table employee(&empno, &ename, &job, &hiredate, &mgr, &sal, &comm, &deptno)
+new   1: create table employee(7876, 'adams', 'clerk', '23-MAY-87', 7788, 1100, NULL, 20)
+create table employee(7876, 'adams', 'clerk', '23-MAY-87', 7788, 1100, NULL, 20)
+                      *
+ERROR at line 1:
+ORA-00904: : invalid identifier
+
+
+SQL> insert into employee values(&empno, &ename, &job, &hiredate, &mgr, &sal, &comm, &deptno);
+Enter value for empno: 7876
+Enter value for ename: 'adams'
+Enter value for job: 'clerk'
+Enter value for hiredate: '23-MAY-87'
+Enter value for mgr: 7788
+Enter value for sal: 1100
+Enter value for comm: NULL
+Enter value for deptno: 20
+old   1: insert into employee values(&empno, &ename, &job, &hiredate, &mgr, &sal, &comm, &deptno)
+new   1: insert into employee values(7876, 'adams', 'clerk', '23-MAY-87', 7788, 1100, NULL, 20)
+
+1 row created.
+
+SQL> /
+Enter value for empno: 7900
+Enter value for ename: 'james'
+Enter value for job: 'clerk'
+Enter value for hiredate: '03-DEC-81'
+Enter value for mgr: 7698
+Enter value for sal: 950
+Enter value for comm: NULL
+Enter value for deptno: 30
+old   1: insert into employee values(&empno, &ename, &job, &hiredate, &mgr, &sal, &comm, &deptno)
+new   1: insert into employee values(7900, 'james', 'clerk', '03-DEC-81', 7698, 950, NULL, 30)
+
+1 row created.
+
+SQL> /
+Enter value for empno: 'ford'
+Enter value for ename:
+Enter value for job:
+Enter value for hiredate:
+Enter value for mgr:
+Enter value for sal:
+Enter value for comm:
+Enter value for deptno:
+old   1: insert into employee values(&empno, &ename, &job, &hiredate, &mgr, &sal, &comm, &deptno)
+new   1: insert into employee values('ford', , , , , , , )
+insert into employee values('ford', , , , , , , )
+                                    *
+ERROR at line 1:
+ORA-00936: missing expression
+
+
+SQL> /
+Enter value for empno: 7902
+Enter value for ename: 'ford'
+Enter value for job: 'analyst'
+Enter value for hiredate: '03-DEC-81'
+Enter value for mgr: 7566
+Enter value for sal: 3000
+Enter value for comm: NULL
+Enter value for deptno: 20
+old   1: insert into employee values(&empno, &ename, &job, &hiredate, &mgr, &sal, &comm, &deptno)
+new   1: insert into employee values(7902, 'ford', 'analyst', '03-DEC-81', 7566, 3000, NULL, 20)
+
+1 row created.
+
+SQL> /
+Enter value for empno: 7934
+Enter value for ename: 'miller'
+Enter value for job: 'clerk'
+Enter value for hiredate: '23-JAN-82'
+Enter value for mgr: 7782
+Enter value for sal: 1300
+Enter value for comm: NULL
+Enter value for deptno: 10
+old   1: insert into employee values(&empno, &ename, &job, &hiredate, &mgr, &sal, &comm, &deptno)
+new   1: insert into employee values(7934, 'miller', 'clerk', '23-JAN-82', 7782, 1300, NULL, 10)
+
+1 row created.
+
+SQL> select * from employee;
+
+     EMPNO ENAME                                              JOB                                        HIREDATE
+---------- -------------------------------------------------- -------------------------------------------------- ---------
+MGR                                                       SAL       COMM     DEPTNO
+-------------------------------------------------- ---------- ---------- ----------
+      7369 smith                                              clerk                                      17-DEC-80
+7902                                                      800                    20
+
+      7499 allen                                              salesman                                   20-FEB-81
+7698                                                     1600        300         30
+
+      7521 ward                                               salesman                                   22-FEB-81
+7698                                                     1250        500         30
+
+
+     EMPNO ENAME                                              JOB                                        HIREDATE
+---------- -------------------------------------------------- -------------------------------------------------- ---------
+MGR                                                       SAL       COMM     DEPTNO
+-------------------------------------------------- ---------- ---------- ----------
+      7566 jones                                              manager                                    02-APR-81
+7839                                                     2975                    20
+
+      7654 martin                                             salesman                                   28-SEP-81
+7698                                                     1250       1400         30
+
+      7698 blake                                              manager                                    01-MAY-81
+7839                                                     2850                    30
+
+
+     EMPNO ENAME                                              JOB                                        HIREDATE
+---------- -------------------------------------------------- -------------------------------------------------- ---------
+MGR                                                       SAL       COMM     DEPTNO
+-------------------------------------------------- ---------- ---------- ----------
+      7782 clark                                              manager                                    09-JUN-81
+7839                                                     2450                    10
+
+      7788 scott                                              analyst                                    19-APR-87
+7566                                                     3000                    20
+
+      7839 king                                               president                                  17-NOV-81
+                                                         5000                    10
+
+
+     EMPNO ENAME                                              JOB                                        HIREDATE
+---------- -------------------------------------------------- -------------------------------------------------- ---------
+MGR                                                       SAL       COMM     DEPTNO
+-------------------------------------------------- ---------- ---------- ----------
+      7844 turner                                             salesman                                   08-SEP-81
+7698                                                     1500          0         30
+
+      7876 adams                                              clerk                                      23-MAY-87
+7788                                                     1100                    20
+
+      7900 james                                              clerk                                      03-DEC-81
+7698                                                      950                    30
+
+
+     EMPNO ENAME                                              JOB                                        HIREDATE
+---------- -------------------------------------------------- -------------------------------------------------- ---------
+MGR                                                       SAL       COMM     DEPTNO
+-------------------------------------------------- ---------- ---------- ----------
+      7902 ford                                               analyst                                    03-DEC-81
+7566                                                     3000                    20
+
+      7934 miller                                             clerk                                      23-JAN-82
+7782                                                     1300                    10
+
+
+14 rows selected.
+
+SQL> set LINESIZE 120
+SQL> select * from employee;
+
+     EMPNO ENAME                                              JOB
+---------- -------------------------------------------------- --------------------------------------------------
+HIREDATE  MGR                                                       SAL       COMM     DEPTNO
+--------- -------------------------------------------------- ---------- ---------- ----------
+      7369 smith                                              clerk
+17-DEC-80 7902                                                      800                    20
+
+      7499 allen                                              salesman
+20-FEB-81 7698                                                     1600        300         30
+
+      7521 ward                                               salesman
+22-FEB-81 7698                                                     1250        500         30
+
+
+     EMPNO ENAME                                              JOB
+---------- -------------------------------------------------- --------------------------------------------------
+HIREDATE  MGR                                                       SAL       COMM     DEPTNO
+--------- -------------------------------------------------- ---------- ---------- ----------
+      7566 jones                                              manager
+02-APR-81 7839                                                     2975                    20
+
+      7654 martin                                             salesman
+28-SEP-81 7698                                                     1250       1400         30
+
+      7698 blake                                              manager
+01-MAY-81 7839                                                     2850                    30
+
+
+     EMPNO ENAME                                              JOB
+---------- -------------------------------------------------- --------------------------------------------------
+HIREDATE  MGR                                                       SAL       COMM     DEPTNO
+--------- -------------------------------------------------- ---------- ---------- ----------
+      7782 clark                                              manager
+09-JUN-81 7839                                                     2450                    10
+
+      7788 scott                                              analyst
+19-APR-87 7566                                                     3000                    20
+
+      7839 king                                               president
+17-NOV-81                                                          5000                    10
+
+
+     EMPNO ENAME                                              JOB
+---------- -------------------------------------------------- --------------------------------------------------
+HIREDATE  MGR                                                       SAL       COMM     DEPTNO
+--------- -------------------------------------------------- ---------- ---------- ----------
+      7844 turner                                             salesman
+08-SEP-81 7698                                                     1500          0         30
+
+      7876 adams                                              clerk
+23-MAY-87 7788                                                     1100                    20
+
+      7900 james                                              clerk
+03-DEC-81 7698                                                      950                    30
+
+
+     EMPNO ENAME                                              JOB
+---------- -------------------------------------------------- --------------------------------------------------
+HIREDATE  MGR                                                       SAL       COMM     DEPTNO
+--------- -------------------------------------------------- ---------- ---------- ----------
+      7902 ford                                               analyst
+03-DEC-81 7566                                                     3000                    20
+
+      7934 miller                                             clerk
+23-JAN-82 7782                                                     1300                    10
+
+
+14 rows selected.
+
+SQL> set LINESIZE 100
+SQL> select * from employee;
+
+     EMPNO ENAME
+---------- --------------------------------------------------
+JOB                                                HIREDATE
+-------------------------------------------------- ---------
+MGR                                                       SAL       COMM     DEPTNO
+-------------------------------------------------- ---------- ---------- ----------
+      7369 smith
+clerk                                              17-DEC-80
+7902                                                      800                    20
+
+      7499 allen
+salesman                                           20-FEB-81
+7698                                                     1600        300         30
+
+     EMPNO ENAME
+---------- --------------------------------------------------
+JOB                                                HIREDATE
+-------------------------------------------------- ---------
+MGR                                                       SAL       COMM     DEPTNO
+-------------------------------------------------- ---------- ---------- ----------
+
+      7521 ward
+salesman                                           22-FEB-81
+7698                                                     1250        500         30
+
+      7566 jones
+manager                                            02-APR-81
+
+     EMPNO ENAME
+---------- --------------------------------------------------
+JOB                                                HIREDATE
+-------------------------------------------------- ---------
+MGR                                                       SAL       COMM     DEPTNO
+-------------------------------------------------- ---------- ---------- ----------
+7839                                                     2975                    20
+
+      7654 martin
+salesman                                           28-SEP-81
+7698                                                     1250       1400         30
+
+      7698 blake
+
+     EMPNO ENAME
+---------- --------------------------------------------------
+JOB                                                HIREDATE
+-------------------------------------------------- ---------
+MGR                                                       SAL       COMM     DEPTNO
+-------------------------------------------------- ---------- ---------- ----------
+manager                                            01-MAY-81
+7839                                                     2850                    30
+
+      7782 clark
+manager                                            09-JUN-81
+7839                                                     2450                    10
+
+
+     EMPNO ENAME
+---------- --------------------------------------------------
+JOB                                                HIREDATE
+-------------------------------------------------- ---------
+MGR                                                       SAL       COMM     DEPTNO
+-------------------------------------------------- ---------- ---------- ----------
+      7788 scott
+analyst                                            19-APR-87
+7566                                                     3000                    20
+
+      7839 king
+president                                          17-NOV-81
+                                                         5000                    10
+
+     EMPNO ENAME
+---------- --------------------------------------------------
+JOB                                                HIREDATE
+-------------------------------------------------- ---------
+MGR                                                       SAL       COMM     DEPTNO
+-------------------------------------------------- ---------- ---------- ----------
+
+      7844 turner
+salesman                                           08-SEP-81
+7698                                                     1500          0         30
+
+      7876 adams
+clerk                                              23-MAY-87
+
+     EMPNO ENAME
+---------- --------------------------------------------------
+JOB                                                HIREDATE
+-------------------------------------------------- ---------
+MGR                                                       SAL       COMM     DEPTNO
+-------------------------------------------------- ---------- ---------- ----------
+7788                                                     1100                    20
+
+      7900 james
+clerk                                              03-DEC-81
+7698                                                      950                    30
+
+      7902 ford
+
+     EMPNO ENAME
+---------- --------------------------------------------------
+JOB                                                HIREDATE
+-------------------------------------------------- ---------
+MGR                                                       SAL       COMM     DEPTNO
+-------------------------------------------------- ---------- ---------- ----------
+analyst                                            03-DEC-81
+7566                                                     3000                    20
+
+      7934 miller
+clerk                                              23-JAN-82
+7782                                                     1300                    10
+
+
+14 rows selected.
+
+SQL> set LINESIZE 160
+SQL> select * from employee;
+
+     EMPNO ENAME                                              JOB                                        HIREDATE
+---------- -------------------------------------------------- -------------------------------------------------- ---------
+MGR                                                       SAL       COMM     DEPTNO
+-------------------------------------------------- ---------- ---------- ----------
+      7369 smith                                              clerk                                      17-DEC-80
+7902                                                      800                    20
+
+      7499 allen                                              salesman                                   20-FEB-81
+7698                                                     1600        300         30
+
+      7521 ward                                               salesman                                   22-FEB-81
+7698                                                     1250        500         30
+
+
+     EMPNO ENAME                                              JOB                                        HIREDATE
+---------- -------------------------------------------------- -------------------------------------------------- ---------
+MGR                                                       SAL       COMM     DEPTNO
+-------------------------------------------------- ---------- ---------- ----------
+      7566 jones                                              manager                                    02-APR-81
+7839                                                     2975                    20
+
+      7654 martin                                             salesman                                   28-SEP-81
+7698                                                     1250       1400         30
+
+      7698 blake                                              manager                                    01-MAY-81
+7839                                                     2850                    30
+
+
+     EMPNO ENAME                                              JOB                                        HIREDATE
+---------- -------------------------------------------------- -------------------------------------------------- ---------
+MGR                                                       SAL       COMM     DEPTNO
+-------------------------------------------------- ---------- ---------- ----------
+      7782 clark                                              manager                                    09-JUN-81
+7839                                                     2450                    10
+
+      7788 scott                                              analyst                                    19-APR-87
+7566                                                     3000                    20
+
+      7839 king                                               president                                  17-NOV-81
+                                                         5000                    10
+
+
+     EMPNO ENAME                                              JOB                                        HIREDATE
+---------- -------------------------------------------------- -------------------------------------------------- ---------
+MGR                                                       SAL       COMM     DEPTNO
+-------------------------------------------------- ---------- ---------- ----------
+      7844 turner                                             salesman                                   08-SEP-81
+7698                                                     1500          0         30
+
+      7876 adams                                              clerk                                      23-MAY-87
+7788                                                     1100                    20
+
+      7900 james                                              clerk                                      03-DEC-81
+7698                                                      950                    30
+
+
+     EMPNO ENAME                                              JOB                                        HIREDATE
+---------- -------------------------------------------------- -------------------------------------------------- ---------
+MGR                                                       SAL       COMM     DEPTNO
+-------------------------------------------------- ---------- ---------- ----------
+      7902 ford                                               analyst                                    03-DEC-81
+7566                                                     3000                    20
+
+      7934 miller                                             clerk                                      23-JAN-82
+7782                                                     1300                    10
+
+
+14 rows selected.
+
+SQL> set PAGESIZE 200
+SQL> select * from employee;
+
+     EMPNO ENAME                                              JOB                                        HIREDATE
+---------- -------------------------------------------------- -------------------------------------------------- ---------
+MGR                                                       SAL       COMM     DEPTNO
+-------------------------------------------------- ---------- ---------- ----------
+      7369 smith                                              clerk                                      17-DEC-80
+7902                                                      800                    20
+
+      7499 allen                                              salesman                                   20-FEB-81
+7698                                                     1600        300         30
+
+      7521 ward                                               salesman                                   22-FEB-81
+7698                                                     1250        500         30
+
+      7566 jones                                              manager                                    02-APR-81
+7839                                                     2975                    20
+
+      7654 martin                                             salesman                                   28-SEP-81
+7698                                                     1250       1400         30
+
+      7698 blake                                              manager                                    01-MAY-81
+7839                                                     2850                    30
+
+      7782 clark                                              manager                                    09-JUN-81
+7839                                                     2450                    10
+
+      7788 scott                                              analyst                                    19-APR-87
+7566                                                     3000                    20
+
+      7839 king                                               president                                  17-NOV-81
+                                                         5000                    10
+
+      7844 turner                                             salesman                                   08-SEP-81
+7698                                                     1500          0         30
+
+      7876 adams                                              clerk                                      23-MAY-87
+7788                                                     1100                    20
+
+      7900 james                                              clerk                                      03-DEC-81
+7698                                                      950                    30
+
+      7902 ford                                               analyst                                    03-DEC-81
+7566                                                     3000                    20
+
+      7934 miller                                             clerk                                      23-JAN-82
+7782                                                     1300                    10
+
+
+14 rows selected.
+
+SQL> select distinct jobs from employee;
+select distinct jobs from employee
+                *
+ERROR at line 1:
+ORA-00904: "JOBS": invalid identifier
+
+
+SQL> select distinct job from employee;
+
+JOB
+--------------------------------------------------
+salesman
+clerk
+president
+manager
+analyst
+
+SQL> select * from employee orderby sal;
+select * from employee orderby sal
+                               *
+ERROR at line 1:
+ORA-00933: SQL command not properly ended
+
+
+SQL> select * from employee order by sal;
+
+     EMPNO ENAME                                              JOB                                        HIREDATE
+---------- -------------------------------------------------- -------------------------------------------------- ---------
+MGR                                                       SAL       COMM     DEPTNO
+-------------------------------------------------- ---------- ---------- ----------
+      7369 smith                                              clerk                                      17-DEC-80
+7902                                                      800                    20
+
+      7900 james                                              clerk                                      03-DEC-81
+7698                                                      950                    30
+
+      7876 adams                                              clerk                                      23-MAY-87
+7788                                                     1100                    20
+
+      7521 ward                                               salesman                                   22-FEB-81
+7698                                                     1250        500         30
+
+      7654 martin                                             salesman                                   28-SEP-81
+7698                                                     1250       1400         30
+
+      7934 miller                                             clerk                                      23-JAN-82
+7782                                                     1300                    10
+
+      7844 turner                                             salesman                                   08-SEP-81
+7698                                                     1500          0         30
+
+      7499 allen                                              salesman                                   20-FEB-81
+7698                                                     1600        300         30
+
+      7782 clark                                              manager                                    09-JUN-81
+7839                                                     2450                    10
+
+      7698 blake                                              manager                                    01-MAY-81
+7839                                                     2850                    30
+
+      7566 jones                                              manager                                    02-APR-81
+7839                                                     2975                    20
+
+      7788 scott                                              analyst                                    19-APR-87
+7566                                                     3000                    20
+
+      7902 ford                                               analyst                                    03-DEC-81
+7566                                                     3000                    20
+
+      7839 king                                               president                                  17-NOV-81
+                                                         5000                    10
+
+
+14 rows selected.
+
+SQL> select * from employee order by deptno asc, job desc;
+
+     EMPNO ENAME                                              JOB                                        HIREDATE
+---------- -------------------------------------------------- -------------------------------------------------- ---------
+MGR                                                       SAL       COMM     DEPTNO
+-------------------------------------------------- ---------- ---------- ----------
+      7839 king                                               president                                  17-NOV-81
+                                                         5000                    10
+
+      7782 clark                                              manager                                    09-JUN-81
+7839                                                     2450                    10
+
+      7934 miller                                             clerk                                      23-JAN-82
+7782                                                     1300                    10
+
+      7566 jones                                              manager                                    02-APR-81
+7839                                                     2975                    20
+
+      7876 adams                                              clerk                                      23-MAY-87
+7788                                                     1100                    20
+
+      7369 smith                                              clerk                                      17-DEC-80
+7902                                                      800                    20
+
+      7788 scott                                              analyst                                    19-APR-87
+7566                                                     3000                    20
+
+      7902 ford                                               analyst                                    03-DEC-81
+7566                                                     3000                    20
+
+      7654 martin                                             salesman                                   28-SEP-81
+7698                                                     1250       1400         30
+
+      7844 turner                                             salesman                                   08-SEP-81
+7698                                                     1500          0         30
+
+      7521 ward                                               salesman                                   22-FEB-81
+7698                                                     1250        500         30
+
+      7499 allen                                              salesman                                   20-FEB-81
+7698                                                     1600        300         30
+
+      7698 blake                                              manager                                    01-MAY-81
+7839                                                     2850                    30
+
+      7900 james                                              clerk                                      03-DEC-81
+7698                                                      950                    30
+
+
+14 rows selected.
+
+SQL> select * from employee where job = 'manager';
+
+     EMPNO ENAME                                              JOB                                        HIREDATE
+---------- -------------------------------------------------- -------------------------------------------------- ---------
+MGR                                                       SAL       COMM     DEPTNO
+-------------------------------------------------- ---------- ---------- ----------
+      7566 jones                                              manager                                    02-APR-81
+7839                                                     2975                    20
+
+      7698 blake                                              manager                                    01-MAY-81
+7839                                                     2850                    30
+
+      7782 clark                                              manager                                    09-JUN-81
+7839                                                     2450                    10
+
+
+SQL> select * from employee where hiredate < '01-JAN-81';
+
+     EMPNO ENAME                                              JOB                                        HIREDATE
+---------- -------------------------------------------------- -------------------------------------------------- ---------
+MGR                                                       SAL       COMM     DEPTNO
+-------------------------------------------------- ---------- ---------- ----------
+      7369 smith                                              clerk                                      17-DEC-80
+7902                                                      800                    20
+
+
+SQL> select empno, ename, sal, sal/12 as Dailysalary from employee order by sal;
+
+     EMPNO ENAME                                                     SAL DAILYSALARY
+---------- -------------------------------------------------- ---------- -----------
+      7369 smith                                                     800  66.6666667
+      7900 james                                                     950  79.1666667
+      7876 adams                                                    1100  91.6666667
+      7521 ward                                                     1250  104.166667
+      7654 martin                                                   1250  104.166667
+      7934 miller                                                   1300  108.333333
+      7844 turner                                                   1500         125
+      7499 allen                                                    1600  133.333333
+      7782 clark                                                    2450  204.166667
+      7698 blake                                                    2850       237.5
+      7566 jones                                                    2975  247.916667
+      7788 scott                                                    3000         250
+      7902 ford                                                     3000         250
+      7839 king                                                     5000  416.666667
+
+14 rows selected.
+
+SQL> select empno, ename, job, hiredate, ('NOW'-hiredate/365) as exp from employee where job = 'manager';
+select empno, ename, job, hiredate, ('NOW'-hiredate/365) as exp from employee where job = 'manager'
+                                           *
+ERROR at line 1:
+ORA-00932: inconsistent datatypes: expected NUMBER got DATE
+
+
+SQL> select empno, ename, job, hiredate, ("NOW"-hiredate/365) as exp from employee where job = 'manager';
+select empno, ename, job, hiredate, ("NOW"-hiredate/365) as exp from employee where job = 'manager'
+                                     *
+ERROR at line 1:
+ORA-00904: "NOW": invalid identifier
+
+
+SQL> select empno, ename, job, hiredate, (SYSDATE-hiredate/365) as exp from employee where job = 'manager';
+select empno, ename, job, hiredate, (SYSDATE-hiredate/365) as exp from employee where job = 'manager'
+                                             *
+ERROR at line 1:
+ORA-00932: inconsistent datatypes: expected NUMBER got DATE
+
+
+SQL> select empno, ename, job, hiredate, (SYSDATE-hiredate)/365 as exp from employee where job = 'manager';
+
+     EMPNO ENAME                                              JOB                                        HIREDATE
+  EXP
+---------- -------------------------------------------------- -------------------------------------------------- --------- ----------
+      7566 jones                                              manager                                    02-APR-81  38.751094
+      7698 blake                                              manager                                    01-MAY-81 38.6716419
+      7782 clark                                              manager                                    09-JUN-81 38.5647926
+
+SQL> select empno, ename, job, sal, (SYSDATE-hiredate)/365 as exp from employee where job = 'manager' AND empno=7839;
+
+no rows selected
+
+SQL> select * from employee where comm>sal;
+
+     EMPNO ENAME                                              JOB                                        HIREDATE
+---------- -------------------------------------------------- -------------------------------------------------- ---------
+MGR                                                       SAL       COMM     DEPTNO
+-------------------------------------------------- ---------- ---------- ----------
+      7654 martin                                             salesman                                   28-SEP-81
+7698                                                     1250       1400         30
+
+
+SQL> select * from employee order by job;
+
+     EMPNO ENAME                                              JOB                                        HIREDATE
+---------- -------------------------------------------------- -------------------------------------------------- ---------
+MGR                                                       SAL       COMM     DEPTNO
+-------------------------------------------------- ---------- ---------- ----------
+      7788 scott                                              analyst                                    19-APR-87
+7566                                                     3000                    20
+
+      7902 ford                                               analyst                                    03-DEC-81
+7566                                                     3000                    20
+
+      7934 miller                                             clerk                                      23-JAN-82
+7782                                                     1300                    10
+
+      7900 james                                              clerk                                      03-DEC-81
+7698                                                      950                    30
+
+      7369 smith                                              clerk                                      17-DEC-80
+7902                                                      800                    20
+
+      7876 adams                                              clerk                                      23-MAY-87
+7788                                                     1100                    20
+
+      7698 blake                                              manager                                    01-MAY-81
+7839                                                     2850                    30
+
+      7566 jones                                              manager                                    02-APR-81
+7839                                                     2975                    20
+
+      7782 clark                                              manager                                    09-JUN-81
+7839                                                     2450                    10
+
+      7839 king                                               president                                  17-NOV-81
+                                                         5000                    10
+
+      7844 turner                                             salesman                                   08-SEP-81
+7698                                                     1500          0         30
+
+      7654 martin                                             salesman                                   28-SEP-81
+7698                                                     1250       1400         30
+
+      7521 ward                                               salesman                                   22-FEB-81
+7698                                                     1250        500         30
+
+      7499 allen                                              salesman                                   20-FEB-81
+7698                                                     1600        300         30
+
+
+14 rows selected.
+
+SQL> select *, (SYSDATE-hiredate)/365 as exp FROM employee where (sal/30)>100;
+select *, (SYSDATE-hiredate)/365 as exp FROM employee where (sal/30)>100
+        *
+ERROR at line 1:
+ORA-00923: FROM keyword not found where expected
+
+
+SQL> select * from employee where job = 'clerk' OR job='analyst' order by ename desc;
+
+     EMPNO ENAME                                              JOB                                        HIREDATE
+---------- -------------------------------------------------- -------------------------------------------------- ---------
+MGR                                                       SAL       COMM     DEPTNO
+-------------------------------------------------- ---------- ---------- ----------
+      7369 smith                                              clerk                                      17-DEC-80
+7902                                                      800                    20
+
+      7788 scott                                              analyst                                    19-APR-87
+7566                                                     3000                    20
+
+      7934 miller                                             clerk                                      23-JAN-82
+7782                                                     1300                    10
+
+      7900 james                                              clerk                                      03-DEC-81
+7698                                                      950                    30
+
+      7902 ford                                               analyst                                    03-DEC-81
+7566                                                     3000                    20
+
+      7876 adams                                              clerk                                      23-MAY-87
+7788                                                     1100                    20
+
+
+6 rows selected.
+
+SQL> select * from employee where hiredate in ('01-MAY-81', '31-DEC-81', '17-DEC-81', '19-JAN-80') order by hiredate desc;
+
+     EMPNO ENAME                                              JOB                                        HIREDATE
+---------- -------------------------------------------------- -------------------------------------------------- ---------
+MGR                                                       SAL       COMM     DEPTNO
+-------------------------------------------------- ---------- ---------- ----------
+      7698 blake                                              manager                                    01-MAY-81
+7839                                                     2850                    30
