@@ -35,40 +35,47 @@ Iterator<String> gmailItr = gmail.iterator();
 Iterator<String> yahooItr = yahoo.iterator();
 Iterator<String> hotmailItr = hotmail.iterator();
 Iterator<String> othersItr = others.iterator();
-int count=1;
-while(count<6) {
+int doLoop=1;
+while(doLoop==1) {
 	
 	char ch = 'g';
 	if(ch=='g') {
 		if(gmailItr.hasNext())
 		System.out.print(gmailItr.next()+"\t\t");
 		else 
-			System.out.print("\t\t\t");
+			{System.out.print("\t\t\t");
+			doLoop=doLoop&0;
+			}
 		ch='y';
 	}
 	if(ch=='y') {
 		if(yahooItr.hasNext())
 		System.out.print(yahooItr.next()+"\t\t");
 		else 
-			System.out.print("\t\t\t");
+		{System.out.print("\t\t\t");
+		doLoop=doLoop|0;
+		}
 		ch='h';
 	}
 	if(ch=='h') {
 		if(hotmailItr.hasNext())
 		System.out.print(hotmailItr.next()+"\t\t");
 		else 
-			System.out.print("\t\t\t");
+		{System.out.print("\t\t\t");
+		doLoop=doLoop|0;
+		}
 		ch='o';
 	}
 	if(ch=='o') {
-		if(yahooItr.hasNext())
+		if(othersItr.hasNext())
 		System.out.print(othersItr.next()+"\t\t");
 		else 
-			System.out.print("\t\t\t");
-		//ch='g';
+		{System.out.print("\t\t\t");
+		doLoop=doLoop|0;
+		}
 	}
 	System.out.println();
-	count++;
+	
 }
 }
 }
